@@ -5,7 +5,10 @@ read IP
 
 curl -s ipinfo.io/$IP/json 
 
-((count = 5))
+echo
+echo "Checking for Ping..."
+
+((count = 2))
 
 while [[ $count -ne 0 ]] ; do
 	ping -q -c 1 $IP > /dev/null
@@ -17,7 +20,6 @@ while [[ $count -ne 0 ]] ; do
 done
 
 if [[ $rc -eq 0 ]] ; then
-	echo
 	echo
 	echo "This IP is pingable"
 else
