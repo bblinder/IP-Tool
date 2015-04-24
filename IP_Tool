@@ -18,6 +18,7 @@ done
 
 if [[ $rc -eq 0 ]] ; then
 	echo
+	echo
 	echo "This IP is pingable"
 else
 	echo
