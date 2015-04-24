@@ -1,0 +1,25 @@
+#!/bin/bash
+
+echo "IP, please?"
+read IP
+
+curl -s ipinfo.io/$IP/json 
+
+((count = 5))
+
+while [[ $count -ne 0 ]] ; do
+	ping -q -c 1 $IP > /dev/null
+	rc=$?
+	if [[ $rc -eq 0 ]] ; then
+		((count = 1))
+	fi
+	((count = count - 1))
+done
+
+if [[ $rc -eq 0 ]] ; then
+	echo
+	echo "This IP is pingable"
+else
+	echo
+	echo "This IP is not pingable"
+fi
