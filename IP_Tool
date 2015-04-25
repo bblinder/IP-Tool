@@ -3,26 +3,36 @@
 echo "IP, please?"
 read IP
 
-curl -s ipinfo.io/$IP/json 
+expression='^[0-9]+$'
 
-echo
-echo "Checking for Ping..."
-
-((count = 2))
-
-while [[ $count -ne 0 ]] ; do
-	ping -q -c 1 $IP > /dev/null
-	rc=$?
-	if [[ $rc -eq 0 ]] ; then
+ping_test(){
+    ((count = 2))
+    
+    while [[ $count -ne 0 ]] ; do
+        ping -q -c 1 $IP > /dev/null
+        rc=$?
+        if [[ $rc -eq 0 ]] ; then
 		((count = 1))
 	fi
 	((count = count - 1))
-done
+    done
+}
 
-if [[ $rc -eq 0 ]] ; then
-	echo
-	echo "This IP is pingable"
+if [[ $IP =~ $expression ]] ; then
+    echo "Please use a valid IP address!"
+    exit 1
 else
+    curl -s ipinfo.io/$IP/json 
+    echo
+    echo "Checking for Ping..."
+
+    ping_test
+    
+    if [[ $rc -eq 0 ]] ; then
+        echo
+	echo "This IP is pingable"
+    else
 	echo
 	echo "This IP is not pingable"
-fi
+    fi
+fi 
