@@ -6,10 +6,10 @@ read IP
 expression='^[0-9]+$'
 
 ping_test(){
-    ((count = 2))
+    ((count = 1))
     
     while [[ $count -ne 0 ]] ; do
-        ping -q -c 1 $IP > /dev/null
+        ping -q -c 1 $IP < /dev/null &> /dev/null
         rc=$?
         if [[ $rc -eq 0 ]] ; then
 		((count = 1))
