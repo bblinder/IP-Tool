@@ -30,7 +30,7 @@ else
     
     if [[ $rc -eq 0 ]] ; then
         echo
-	echo "This IP is pingable!"
+	echo "This IP is pingable"
     else
 	echo
 	echo "This IP is not pingable!"
