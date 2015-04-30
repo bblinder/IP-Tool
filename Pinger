@@ -22,9 +22,7 @@ if [[ $IP =~ $expression ]] ; then
     echo "Please use a valid IP address!"
     exit 1
 else
-    # techically don't have to use "/json" in the URL; just did
-    # it to force it.
-    curl -s ipinfo.io/$IP/json 
+    curl -s ipinfo.io/$IP/json ## technically don't have to use "json" in the URL. 
     echo
     echo "Checking for Ping..."
 
