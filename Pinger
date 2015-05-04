@@ -9,7 +9,7 @@ ping_test(){
     ((count = 1))
     
     while [[ $count -ne 0 ]] ; do
-        ping -q -c 1 $IP < /dev/null &> /dev/null
+        ping -q -c 1 "$IP" < /dev/null &> /dev/null
         rc=$?
         if [[ $rc -eq 0 ]] ; then
 		((count = 1))
@@ -18,7 +18,7 @@ ping_test(){
     done
 }
 
-if [[ $IP =~ $expression ]] ; then
+if [[ "$IP" =~ $expression ]] ; then
     echo "Please use a valid IP address!"
     exit 1
 else
